@@ -1,0 +1,32 @@
+/*Arduino test code for Rain Sensor
+
+Date : 16/08/18
+*/
+
+
+const int sensorMin = 0;     
+const int sensorMax = 1024;  
+
+void setup() {
+  Serial.begin(9600);  
+}
+void loop() {
+  // read the sensor on analog A1:
+	int sensorReading = analogRead(A1);
+
+	int range = map(sensorReading, sensorMin, sensorMax, 0, 3);
+  
+  // range value:
+  switch (range) {
+ case 0:    // Sensor getting wet
+    Serial.println("Flood");
+    break;
+ case 1:    // Sensor getting wet
+    Serial.println("Rain Warning");
+    break;
+ case 2:    // Sensor dry - To shut this up delete the " Serial.println("Not Raining"); " below.
+    Serial.println("Not Raining");
+    break;
+  }
+  delay(100);  
+}
